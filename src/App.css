@@ -1,9 +1,23 @@
-#root {
+:root {
+  --main-color: blue;
+  --main-layout-direction: column;
+  --secondary-layout-direction: row;
+  --cv-font-family: sans-serif;
 }
-
 * {
   margin: 0px;
   padding: 0px;
+}
+
+#root {
+  width: 90vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 200px;
+  gap: 80px;
 }
 body {
   display: flex;
@@ -47,8 +61,78 @@ form div {
   display: flex;
 }
 
-#root {
+.right-section-container {
+  flex-basis: 750px;
+  min-height: 900px;
+  background-color: rgb(83, 55, 55);
+  display: flex;
+  flex-direction: var(--main-layout-direction);
+  font-family: var(--cv-font-family);
+}
+.personal-details {
+  background-color: var(--main-color);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+}
+
+.personal-details-contact {
+  display: flex;
+  flex-direction: var(--secondary-layout-direction);
+  gap: 10px;
+  justify-content: space-around;
+}
+.mail {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  flex-grow: 1;
+}
+.mail p {
+  align-self: center;
+}
+svg {
+  max-width: 50px;
+  fill: white;
+}
+.personal-details h1 {
+  text-align: center;
+}
+.phone {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+.address {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+.phone p {
+  align-self: center;
+}
+.address p {
+  align-self: center;
+}
+.education {
+  padding-top: 40px;
+}
+h2 {
+  text-align: center;
+  background-color: rgb(70, 73, 73);
+}
+.education-content {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+#description {
+  line-break: anywhere;
+}
+.main-cv-section {
+  display: flex;
+  flex-direction: column;
 }

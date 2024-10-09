@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { defaultArray } from "./defaultArray";
 ///////////////////////// TOOODOO
 
 ////////////////////////////
@@ -91,13 +92,13 @@ const workDetails = {
       id: crypto.randomUUID(),
     },
     {
-      name: "start date",
+      name: "work start date",
       type: "date",
       example: "",
       id: crypto.randomUUID(),
     },
     {
-      name: "end date",
+      name: "work end date",
       type: "date",
       example: "",
       id: crypto.randomUUID(),
@@ -118,9 +119,18 @@ const workDetails = {
 };
 function Reset({ state }) {
   return (
-    <button onClick={() => state.setAppState([])} className="reset-btn">
-      Reset
-    </button>
+    <div className="utils-container">
+      <button onClick={() => state.setAppState([])} className="reset-btn">
+        Reset
+      </button>
+      <button
+        className="load-example"
+        onClick={() => state.setAppState(defaultArray)}
+      >
+        {" "}
+        Load example
+      </button>
+    </div>
   );
 }
 
@@ -131,9 +141,7 @@ function Content({ state }) {
 
     let object = newState.filter((curr) => curr.name == name);
 
-    /// !== 1
-
-    if (value.length > 1 && object.length !== 0) {
+    if (value.length >= 0 && object.length !== 0) {
       let index = newState.indexOf(object[0]);
 
       newState[index].value = value;
@@ -141,7 +149,7 @@ function Content({ state }) {
       state.setAppState(newState);
     } else {
       newState.push({ name: name, value: value });
-
+      console.log(newState);
       state.setAppState(newState);
     }
   }
@@ -208,7 +216,7 @@ function Toggle({ name, categories, findValue, inputOnChange }) {
           formIsShown ? setFormIsShown(false) : setFormIsShown(true)
         }
       >
-        HEY
+        {name}
       </div>
 
       {formIsShown && (
@@ -226,16 +234,85 @@ function Toggle({ name, categories, findValue, inputOnChange }) {
 function Customize() {
   return (
     <>
-      <div>
+      <div className="layout-container">
         <h1>Layout</h1>
         <div className="button-container">
-          <button>Does</button>
-          <button>Some</button>
-          <button>Thing</button>
+          <button
+            className="layout-top"
+            onClick={() => {
+              document.documentElement.style.cssText =
+                "--main-layout-direction:column";
+            }}
+          >
+            Top
+          </button>
+          <button
+            className="layout-left"
+            onClick={() => {
+              document.documentElement.style.cssText +=
+                "--main-layout-direction:row";
+              document.documentElement.style.cssText +=
+                "--secondary-layout-direction:column";
+            }}
+          >
+            Left
+          </button>
+          <button
+            className="layout-right"
+            onClick={() => {
+              document.documentElement.style.cssText =
+                "--main-layout-direction:row-reverse";
+              document.documentElement.style.cssText +=
+                "--secondary-layout-direction:column";
+            }}
+          >
+            Right
+          </button>
         </div>
       </div>
-      <div>Color</div>
-      <div>Fonts</div>
+      <div className="color-container">
+        <h1>Color</h1>
+        <label htmlFor="color">Color</label>
+
+        <input
+          type="color"
+          className="color"
+          onChange={(e) => {
+            document.documentElement.style.cssText =
+              "--main-color:" + e.target.value;
+          }}
+        />
+      </div>
+      <div>
+        <h1>Fonts</h1>
+        <button
+          className="sans-serif"
+          onClick={() => {
+            document.querySelector(".right-section-container").style.cssText =
+              "--cv-font-family:sans-serif";
+          }}
+        >
+          Serif
+        </button>
+        <button
+          className="sans"
+          onClick={() => {
+            document.querySelector(".right-section-container").style.cssText =
+              "--cv-font-family:'sans'";
+          }}
+        >
+          Sans
+        </button>
+        <button
+          className="mono"
+          onClick={() => {
+            document.querySelector(".right-section-container").style.cssText =
+              "--cv-font-family:'Courier New'";
+          }}
+        >
+          Mono
+        </button>
+      </div>
     </>
   );
 }
